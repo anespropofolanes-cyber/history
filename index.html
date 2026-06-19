@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台灣・中國・世界 三軌歷史對照</title>
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#5c4327">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="史地時光軸">
 <style>
 :root{
   --bg1:#f7f2e9; --bg2:#efe7d7;
@@ -19,7 +27,7 @@
 .pg4{--pc:#d09221}.pg5{--pc:#2f8893}.pg6{--pc:#2f7d5f}.pg7{--pc:#9c6736}
 .pg8{--pc:#4170a4}.pg9{--pc:#5d6573}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html,body{margin:0;height:100%;overflow-x:clip;max-width:100%}
 body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
   color:var(--ink);font-size:var(--fs);line-height:1.6;
   background:radial-gradient(1200px 600px at 70% -10%,#fffaf0,transparent),
@@ -376,10 +384,30 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
   .year{background:#666!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .row{break-inside:avoid}
 }
-@media(max-width:760px){
-  .heads,.row{grid-template-columns:82px 1fr 1fr 1fr}
-  .title small{display:none}.cell{padding:10px 11px}
-  .year{padding:11px 4px}.dyn{letter-spacing:1px;padding:9px 14px}
+/* phones & tablets: stack the three tracks vertically — no horizontal scroll */
+@media(max-width:900px){
+  .title small{display:none}
+  header{position:static}
+  .dyn{top:0!important;z-index:25}
+  .heads{display:none}
+  .row{display:block;border-bottom:2px solid var(--line)}
+  .row+.row{border-top:none}
+  .row .year{display:flex;flex-direction:row;align-items:center;gap:10px;justify-content:flex-start;padding:9px 15px}
+  .row .year .yl{font-size:15px}
+  .cell{display:block;border-left:none!important;padding:8px 15px;background:none!important}
+  .cell.bare{display:none}
+  .cell:not(.year)::before{display:block;font-size:11px;font-weight:800;letter-spacing:2px;margin-bottom:3px}
+  .c-tw::before{content:"台　灣";color:var(--tw)}
+  .c-cn::before{content:"中　國";color:var(--cn)}
+  .c-wo::before{content:"世　界";color:var(--wo)}
+  .evt{font-size:14.5px}
+  .dyn{letter-spacing:1px;padding:9px 15px}
+  body.axis-tw .row,body.axis-cn .row,body.axis-wo .row{grid-template-columns:none}
+  .bar{padding:9px 13px;gap:8px}
+  .title{font-size:18px;letter-spacing:1px}
+  .search{flex-basis:100%;order:9;min-width:0}
+  .count{display:none}
+  .btn{padding:6px 11px;font-size:12.5px}
 }
 </style>
 </head>
