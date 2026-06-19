@@ -53,6 +53,13 @@ header{position:sticky;top:0;z-index:40;
 #panel.hidden{display:none}
 .sec[hidden]{display:none}
 .btn.tab.on{background:linear-gradient(180deg,var(--accent),#a87c28);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(180,140,50,.32)}
+.btn.axis.on{background:linear-gradient(180deg,var(--accent),#a87c28);color:#fff;border-color:transparent}
+body.axis-tw .c-cn,body.axis-tw .c-wo,body.axis-tw .h-cn,body.axis-tw .h-wo,
+body.axis-cn .c-tw,body.axis-cn .c-wo,body.axis-cn .h-tw,body.axis-cn .h-wo,
+body.axis-wo .c-tw,body.axis-wo .c-cn,body.axis-wo .h-tw,body.axis-wo .h-cn{display:none}
+body.axis-tw .row,body.axis-tw .heads,
+body.axis-cn .row,body.axis-cn .heads,
+body.axis-wo .row,body.axis-wo .heads{grid-template-columns:118px 1fr}
 .vsep{width:1px;height:20px;background:var(--line);margin:0 4px}
 .btn.home{background:linear-gradient(180deg,#fff,#f3ead7);border-color:var(--accent);color:var(--rail);font-weight:800}
 .subbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:0 20px 10px}
@@ -110,7 +117,7 @@ header{position:sticky;top:0;z-index:40;
 mark{background:linear-gradient(180deg,#fff0b8,var(--hi));border-radius:3px;padding:0 2px;box-shadow:0 1px 0 rgba(180,140,40,.3)}
 
 /* ---------- period banner ---------- */
-.dyn{grid-column:1/5;position:sticky;left:0;z-index:20;display:flex;align-items:baseline;gap:12px;
+.dyn{grid-column:1/-1;position:sticky;left:0;z-index:20;display:flex;align-items:baseline;gap:12px;
   flex-wrap:wrap;padding:11px 22px;color:#fff;letter-spacing:2px;width:100%;
   background:linear-gradient(100deg,var(--pc),color-mix(in srgb,var(--pc) 55%,#fff) 130%);
   box-shadow:0 3px 12px rgba(0,0,0,.16);border-top:3px solid rgba(255,255,255,.4)}
@@ -200,21 +207,22 @@ body.present .hint{display:block}
 .note::before{content:"註　";font-weight:800;color:#c08a2c}
 
 /* spotlight popover (同年三地對照) */
-#spot{position:fixed;inset:0;z-index:62;display:none;align-items:center;justify-content:center;
-  background:rgba(30,22,12,.55);backdrop-filter:blur(3px);padding:20px}
+#spot{position:fixed;inset:0;z-index:72;display:none;align-items:center;justify-content:center;
+  background:rgba(24,17,9,.92);padding:20px}
 #spot.open{display:flex}
-.sp-card{background:var(--panel);border-radius:18px;max-width:780px;width:100%;max-height:86vh;overflow:auto;
-  box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.sp-card{background:#fffdf9;border-radius:18px;max-width:680px;width:100%;max-height:86vh;overflow:auto;
+  position:relative;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .sp-head{display:flex;align-items:center;gap:14px;padding:16px 22px;color:#fff}
-.sp-head .y{font-size:26px;font-weight:800;letter-spacing:1px}
-.sp-head .e{font-size:12px;font-weight:700;background:rgba(255,255,255,.22);padding:3px 11px;border-radius:11px}
-.sp-head .c{margin-left:auto;cursor:pointer;font-size:22px;opacity:.9}
-.sp-body{padding:6px 22px 22px}
-.sp-reg{margin:14px 0;padding-left:14px;border-left:4px solid var(--rc)}
-.sp-reg h4{margin:0 0 6px;font-size:14px;letter-spacing:2px;color:var(--rc)}
-.sp-reg p{margin:0 0 6px;font-size:14px;line-height:1.7;color:#3b342b;padding-left:13px;position:relative}
+.sp-head .y{font-size:25px;font-weight:800;letter-spacing:1px}
+.sp-head .e{font-size:12px;font-weight:700;background:rgba(255,255,255,.22);padding:3px 11px;border-radius:11px;white-space:nowrap}
+.sp-head .c{margin-left:auto;cursor:pointer;font-size:24px;opacity:.9}
+.sp-body{padding:12px 22px 24px;display:flex;flex-direction:column;gap:12px}
+.sp-reg{display:flex;flex-direction:column;gap:6px;width:auto;margin:0;padding:11px 14px;
+  border-left:4px solid var(--rc);background:#faf6ec;border-radius:0 10px 10px 0}
+.sp-reg h4{margin:0;font-size:15px;font-weight:800;letter-spacing:1px;color:var(--rc)}
+.sp-reg p{margin:0;font-size:14.5px;line-height:1.7;color:#3b342b;padding-left:14px;position:relative}
 .sp-reg p::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--rc);opacity:.6}
-.sp-reg.empty p{color:#bdb39e}
+.sp-empty{font-size:13px;color:#a99e88;text-align:center;padding:4px 0 2px;letter-spacing:1px}
 
 /* quiz */
 #quizview{position:fixed;inset:0;z-index:64;display:none;align-items:center;justify-content:center;
@@ -305,6 +313,48 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
 .pl-card.woidx{background:linear-gradient(135deg,#4170a4,#274b73)}
 .pl-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(80,50,30,.28)}
 @media(max-width:600px){.pl-cards{grid-template-columns:1fr}}
+/* lyrics page */
+#lyricsview{position:fixed;inset:0;z-index:66;display:none;overflow-y:auto;
+  background:radial-gradient(800px 460px at 70% -8%,#fff6e6,transparent),linear-gradient(160deg,#f3ead8,#e7dac3)}
+#lyricsview.open{display:block}
+.lyr{max-width:600px;margin:0 auto;padding:30px 22px 70px}
+.lyr-close{position:fixed;top:16px;right:18px;z-index:2;background:rgba(255,255,255,.78);border:1px solid var(--line);
+  border-radius:20px;padding:8px 16px;cursor:pointer;font-weight:700;color:var(--rail);backdrop-filter:blur(4px)}
+.lyr-hero{text-align:center;margin-bottom:6px}
+.lyr-hero .kick{letter-spacing:6px;font-size:12px;color:var(--gold);font-weight:700}
+.lyr-hero h1{font-size:30px;color:var(--rail);letter-spacing:3px;margin:6px 0 4px}
+.lyr-hero .sub{font-size:13px;color:var(--muted)}
+.lyr-player{background:linear-gradient(165deg,#7a5a2e,#523418);border-radius:16px;padding:16px;margin:16px 0 22px;text-align:center}
+.lyr-player audio{width:100%;max-width:460px}
+.lyr-player .n{font-size:12px;color:#e6d3aa;margin-top:8px}
+.lyr-sec{margin:13px 0}
+.lyr-label{font-size:12px;font-weight:800;letter-spacing:3px;color:#9a6a1e;margin-bottom:3px}
+.lyr-text{font-size:16.5px;line-height:2.05;color:#3a322a}
+.lyr-sec.chorus{background:#fbf3e1;border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:10px 16px;margin:14px 0}
+.lyr-sec.chorus .lyr-label{color:#b9892f}
+.lyr-sec.chorus .lyr-text{font-weight:600}
+/* creation-myth story page */
+.myth-go{display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;margin:4px 0 2px;
+  background:linear-gradient(180deg,#7c4f28,#523418);color:#f5ecd8;font-size:15px;font-weight:800;
+  letter-spacing:1px;padding:11px 24px;border-radius:22px;box-shadow:0 6px 16px rgba(80,50,20,.26)}
+.myth-go:hover{filter:brightness(1.08);transform:translateY(-1px)}
+#mythview{position:fixed;inset:0;z-index:66;display:none;overflow-y:auto;
+  background:radial-gradient(900px 500px at 70% -8%,#fff7ea,transparent),linear-gradient(160deg,#f7f0e2,#ece2cf)}
+#mythview.open{display:block}
+.myth{max-width:760px;margin:0 auto;padding:30px 24px 80px}
+.myth-close{position:fixed;top:16px;right:18px;z-index:2;background:rgba(255,255,255,.78);border:1px solid var(--line);
+  border-radius:20px;padding:8px 16px;cursor:pointer;font-weight:700;color:var(--rail);backdrop-filter:blur(4px)}
+.myth-hero{text-align:center;padding:18px 0;border-bottom:2px solid var(--line);margin-bottom:6px}
+.myth-hero .kick{letter-spacing:7px;font-size:12px;color:var(--gold);font-weight:700}
+.myth-hero h1{font-size:33px;color:var(--rail);letter-spacing:3px;margin:8px 0 12px}
+.myth-hero p{font-size:15px;color:#5f5546;line-height:1.85;max-width:600px;margin:8px auto}
+.myth-frame{font-weight:700;color:#7c4f28!important}
+.myth-sec{margin:32px 0;padding-left:16px;border-left:4px solid var(--mc,#b9892f)}
+.myth-sec h2{font-size:23px;color:var(--mc);letter-spacing:1px;margin:0 0 8px}
+.myth-flow{display:inline-block;font-size:12.5px;font-weight:700;color:#fff;background:var(--mc);
+  padding:5px 13px;border-radius:13px;margin-bottom:10px;letter-spacing:1px}
+.myth-sec p{font-size:15.5px;line-height:1.95;color:#39322a;margin:12px 0;text-align:justify}
+.s-cn{--mc:#bb463a}.s-meso{--mc:#b07d2e}.s-greek{--mc:#4170a4}
 /* index page (中國朝代 / 西方紀元) */
 #indexview{position:fixed;inset:0;z-index:66;display:none;align-items:flex-start;justify-content:center;
   background:rgba(20,14,8,.62);backdrop-filter:blur(4px);padding:22px;overflow-y:auto}
@@ -361,7 +411,13 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
       <div class="subbar" id="mmwrap"><span class="lab">密度</span><span class="mm-note">史前略</span><div class="mm" id="minimap" title="事件密度（每世紀），點擊跳轉"></div></div>
     </div>
     <div class="sec" id="sec-filter" hidden>
-      <div class="subbar" id="themewrap"><span class="lab">主題</span><span class="group" id="themes"></span><span class="vsep"></span><button class="btn" id="twonly">只看台灣</button></div>
+      <div class="subbar" id="themewrap"><span class="lab">主題</span><span class="group" id="themes"></span></div>
+      <div class="subbar"><span class="lab">單軸</span>
+        <button class="btn axis on" data-axis="all">三軌對照</button>
+        <button class="btn axis" data-axis="tw">只看台灣</button>
+        <button class="btn axis" data-axis="cn">只看中國</button>
+        <button class="btn axis" data-axis="wo">只看世界</button>
+      </div>
     </div>
     <div class="sec" id="sec-func" hidden>
       <div class="subbar"><span class="lab">學習</span>
@@ -469,6 +525,7 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
       <div class="pl-m wo"><h4>兩河・埃及</h4><p>《吉爾伽美什史詩》追尋永生；埃及法老自認太陽神「拉」的化身。</p></div>
       <div class="pl-m tw"><h4>希臘・希伯來</h4><p>奧林帕斯諸神；《創世記》七日創世。各地同時為世界找一個開端。</p></div>
     </div>
+    <div style="text-align:center;margin:6px 0 4px"><button class="myth-go" id="mythBtn">讀完整的創世故事　→</button></div>
 
     <div class="pl-h serif">從傳說，接上信史</div>
     <p>大禹治水有功，其子啟建立夏朝、「家天下」，王位由禪讓改世襲；再經商、周，年代與事件逐漸可考，傳說正式接上歷史。</p>
@@ -485,13 +542,93 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
       <div class="verse serif">夏商與西周，東周分兩段。<br>春秋和戰國，一統秦兩漢。<br>三分魏蜀吳，二晉前後延。<br>南北朝並立，隋唐五代傳。<br>宋元明清後，皇朝至此完。</div>
       <div class="n">「東周分兩段」＝春秋＋戰國　・　「二晉前後延」＝西晉、東晉</div>
     </div>
-    <div class="pl-audio">
-      <div class="t serif">唱誦版・點播放跟著唱</div>
-      <audio controls preload="metadata" src="一朝一關鍵.mp3"></audio>
-      <div class="n">把朝代順序記進旋律與耳朵裡。</div>
-    </div>
+    <div style="text-align:center;margin:10px 0 2px"><button class="myth-go" id="lyrBtn">聽歌・看完整歌詞　→</button></div>
 
     <p class="pl-tip">背朝代歌是骨架，每朝記一個關鍵詞當釘子；再把故事一個個掛上去，年代就會黏起來。</p>
+  </div>
+</div></div>
+
+<div id="lyricsview"><div class="lyr">
+  <button class="lyr-close" id="lyrClose">× 返回</button>
+  <div class="lyr-hero">
+    <div class="kick serif">朝代歌・唱誦版</div>
+    <h1 class="serif">一朝一關鍵</h1>
+    <div class="sub">把歷史唱成旋律，朝代順序記進耳朵裡</div>
+  </div>
+  <div class="lyr-player">
+    <audio controls preload="metadata" src="一朝一關鍵.mp3"></audio>
+    <div class="n">點播放，跟著歌詞一起唱。</div>
+  </div>
+  <div class="lyr-sec"><div class="lyr-label">主歌一</div><div class="lyr-text">夏起家天下，世襲從此開<br>商有甲骨青銅，占卜問天來<br>西周封建禮樂，宗法井田排<br>春秋五霸爭鋒，尊王名聲在</div></div>
+  <div class="lyr-sec"><div class="lyr-label">主歌二</div><div class="lyr-text">戰國七雄變法，百家齊鳴開<br>秦統一天下，書同文不改<br>漢通絲路萬里，獨尊儒術台<br>造紙傳千古，文明寫下來</div></div>
+  <div class="lyr-sec chorus"><div class="lyr-label">副歌</div><div class="lyr-text">一朝一關鍵，一句記心田<br>從古到今的故事，串成時間線<br>一朝一關鍵，唱過千百年<br>興衰合分都看見，歷史在眼前</div></div>
+  <div class="lyr-sec"><div class="lyr-label">主歌三</div><div class="lyr-text">三國分裂爭霸，群雄逐鹿來<br>魏晉玄學清談，門閥世族排<br>南北民族融合，佛教香火開<br>隋開大運河，科舉選人才</div></div>
+  <div class="lyr-sec"><div class="lyr-label">主歌四</div><div class="lyr-text">唐是盛世氣象，詩歌滿長安<br>國際都會繁華，萬國來朝看<br>宋代理學商業，印刷文人傳<br>明有鄭和下西洋，海禁集權嚴</div></div>
+  <div class="lyr-sec chorus"><div class="lyr-label">副歌</div><div class="lyr-text">一朝一關鍵，一句記心田<br>從古到今的故事，串成時間線<br>一朝一關鍵，唱過千百年<br>興衰合分都看見，歷史在眼前</div></div>
+  <div class="lyr-sec"><div class="lyr-label">橋段</div><div class="lyr-text">元跨蒙古歐亞，行省連山海<br>清有盛世轉衰，閉關到末代<br>五代十國分分合，天下又重排<br>背起朝代的骨架，故事就展開</div></div>
+  <div class="lyr-sec chorus"><div class="lyr-label">最後副歌</div><div class="lyr-text">一朝一關鍵，一句記心田<br>朝代掛鉤記得牢，考場不慌亂<br>一朝一關鍵，唱過千百年<br>把歷史唱成旋律，答案在耳邊</div></div>
+</div></div>
+
+<div id="mythview"><div class="myth">
+  <button class="myth-close" id="mythClose">× 返回</button>
+  <div class="myth-hero">
+    <div class="kick serif">創世・文明的開端</div>
+    <h1 class="serif">世界是怎麼開始的？</h1>
+    <p>當中國有盤古開天、女媧造人，兩河流域有《吉爾伽美什史詩》，埃及有太陽神拉的時候，地中海與中東的人們，也正在思考同一個問題——只是他們給出了不同的答案。</p>
+    <p class="myth-frame">中國人思考如何治天下；兩河人思考如何面對死亡；埃及人思考如何獲得永生。</p>
+  </div>
+  <div class="myth-body">
+    <section class="myth-sec s-cn">
+      <h2 class="serif">中國・從混沌到家天下</h2>
+      <span class="myth-flow">盤古開天 → 女媧造人 → 三皇五帝 → 大禹治水 → 夏朝家天下</span>
+      <p>在很久很久以前，天地尚未形成的時候，宇宙是一片混沌。沒有天空，也沒有大地，沒有日月星辰，更沒有山川河流。一切都沉睡在無邊無際的黑暗之中。</p>
+      <p>傳說在這片混沌之中，誕生了一位巨人，名叫盤古。他在黑暗裡沉睡了無數歲月，直到有一天醒來，發現自己被困在狹小的空間裡。盤古感到十分難受，於是舉起巨大的斧頭，奮力向前一劈。隨著驚天動地的一聲巨響，混沌被劈開了。</p>
+      <p>輕盈而清澈的氣息緩緩上升，化作遼闊的天空；沉重而混濁的部分則慢慢下沉，形成堅實的大地。為了不讓天地再次合攏，盤古用自己的身體撐住天地。天每天升高一丈，地每天加厚一丈，盤古的身體也跟著長高一丈。經過漫長的歲月後，天地終於穩定下來，而盤古也耗盡了自己的生命。</p>
+      <p>當他倒下時，他的雙眼化作日月，照亮世間；呼出的氣息化作風雲；聲音化作雷霆；血液化為江河；肌肉變成沃土；骨骼化作山脈。於是，世界真正誕生了。</p>
+      <p>天地雖然形成了，但大地上依然十分寂靜。山川河流之間沒有歡笑，也沒有生命活動的痕跡。這時，一位充滿慈悲與智慧的女神來到了世間，她就是女媧。</p>
+      <p>女媧漫步在大地之上，看見天地如此遼闊，卻缺少能夠陪伴彼此的生命。於是她來到河邊，捧起黃土，依照自己的模樣捏塑出一個個小人。當她輕輕吹一口氣，那些泥土做成的小人竟然活了起來。他們能說話、能行走、會哭也會笑。</p>
+      <p>女媧看著這些新生命在大地上奔跑嬉戲，感到十分欣慰。但世界太大了，一個一個捏製實在太慢。於是她拿起藤條沾滿泥漿，向四周揮灑。無數泥點落到地面，也變成了一個又一個的人類。從此，大地開始熱鬧起來，人們建立聚落、繁衍後代，文明的種子也悄悄萌芽。</p>
+      <p>隨著時間流逝，人類逐漸學會了生存的智慧。傳說中的聖王接連出現，後世稱他們為三皇五帝。伏羲教導人們觀察天地變化，創立八卦，幫助人們理解自然的規律；神農氏嘗遍百草，教導百姓耕種與醫藥；而黃帝則帶領部落發展文化與技術，逐漸形成華夏文明的雛形。</p>
+      <p>在那個時代，領導者並不是由家族繼承，而是由最有德行、最有能力的人來擔任。黃帝之後，有顓頊、帝嚳等賢明君主，而最受後世尊敬的，則是堯與舜。堯帝愛民如子，當他年老時，並沒有把權力交給自己的兒子，而是選擇德才兼備的舜作為繼承人。舜即位後同樣勤政愛民，使天下安定繁榮。這種把天下交給賢者的制度，被後世稱為「禪讓」。</p>
+      <p>然而，就在舜治理天下的時候，一場巨大的災難降臨了。連年暴雨讓河川氾濫，洪水淹沒村莊與田地，百姓流離失所。舜於是命令一位名叫禹的人負責治理洪水。</p>
+      <p>禹的父親鯀曾經嘗試築起高堤阻擋洪水，但效果並不好。禹從失敗中學習，決定採用不同的方法。他不再一味堵塞河流，而是帶領人民挖掘河道、疏通水路，讓洪水能夠順利流向大海。</p>
+      <p>為了治理洪患，禹跋山涉水，走遍天下。十三年來幾乎沒有休息。傳說他有三次經過自己的家門，甚至聽見妻子和孩子的聲音，卻仍然沒有停下腳步——因為他知道，還有更多百姓正在等待洪水退去。最終，河流被疏通，洪水獲得控制，田地重新恢復生機，天下再次恢復平靜。</p>
+      <p>禹的功績感動了所有人。當舜年老時，便將治理天下的責任交給了他，禹成為新的天下共主。原本按照禪讓的傳統，禹應該在晚年選出最有能力的人來繼承天下；然而當禹去世後，百姓與部族首領們卻擁護禹的兒子啟繼承王位，而不是另選賢者。</p>
+      <p>於是，中國歷史上的第一個王朝——夏朝誕生了。從前的「天下為公」，逐漸轉變成由一家一姓世代繼承的「家天下」。王位開始由父親傳給兒子，由兒子再傳給孫子。這種制度，影響了往後數千年的中國歷史。</p>
+      <p>雖然盤古開天、女媧造人、三皇五帝的故事帶有濃厚的神話色彩，但它們反映了古人對天地起源、人類誕生與文明發展的想像。而到了大禹治水與夏朝建立的時代，中國的歷史也開始從神話傳說，逐漸走向可以被後世追尋與驗證的文明記憶。從混沌初開的天地，到人類建立王朝的那一刻，華夏文明的長河，就這樣緩緩展開了第一頁。</p>
+    </section>
+
+    <section class="myth-sec s-meso">
+      <h2 class="serif">兩河與埃及・面對死亡與永生</h2>
+      <span class="myth-flow">吉爾伽美什追尋永生　・　法老是太陽神拉的化身</span>
+      <p>在古老的西方世界，兩條大河靜靜流過遼闊的土地。一條叫底格里斯河，一條叫幼發拉底河。河水滋養了田地，也孕育出最早的城市。人們在泥板上刻下文字，建造城牆與神廟，向天空中的神祈禱，希望得到雨水、豐收與平安。</p>
+      <p>在這片土地上，有一座偉大的城市，名叫烏魯克。烏魯克有高大的城牆，也有一位強大的國王，他叫吉爾伽美什。吉爾伽美什力大無窮，勇敢威武，幾乎沒有人能與他相比；可是他也驕傲任性，讓人民感到害怕。於是神明創造了一位野性而強壯的朋友，名叫恩奇都，希望他能讓吉爾伽美什學會謙卑。</p>
+      <p>一開始，兩人互不相讓，像兩頭猛獸般爭鬥。可是打到最後，他們竟然彼此敬重，成為最好的朋友。從此，吉爾伽美什不再孤單。他和恩奇都一起冒險，一起挑戰怪獸，一起走進遙遠的森林。他們以為只要足夠勇敢，就沒有什麼能阻擋他們。</p>
+      <p>直到有一天，恩奇都死了。吉爾伽美什第一次看見死亡如此靠近。他看著朋友安靜地躺著，再也不會說話，再也不能與他並肩同行。那一刻，他心中充滿恐懼——他突然明白，即使自己是國王，即使擁有力量與榮耀，有一天也會像恩奇都一樣離開世界。</p>
+      <p>於是，他離開烏魯克，踏上尋找永生的旅程。他穿越荒野，越過黑暗的山，走過死亡之水，只為了找到一個傳說中獲得永生的人。吉爾伽美什想知道，人是否能逃過死亡。</p>
+      <p>最後，他找到了答案；可是答案並不是他期待的——永生並不屬於凡人。人會老去，會失去，會死亡。真正能留下的，不是永遠不死的身體，而是曾經建立的城市、守護過的人、留下的故事，以及活著時如何面對生命。吉爾伽美什最後回到烏魯克，看著城市高大的城牆，終於明白：人無法成為永生的神，但人可以用一生，留下值得被記住的痕跡。</p>
+      <p>而在另一片古老土地上，尼羅河每年定時氾濫，帶來肥沃的黑土。那裡的人們相信，太陽每天升起、落下，又在隔天重新出現，象徵生命可以穿越死亡、再次重生。他們敬奉太陽神拉。拉是光明的主人，是天空中太陽的力量；每一天，拉駕著太陽船橫越天際，照亮人間；每一夜，他進入冥界與黑暗搏鬥，直到清晨再次升起。</p>
+      <p>埃及人相信，他們的國王法老不是普通的人。法老是神在人間的代表，是太陽神拉的化身。當法老活著時，他統治土地、維持秩序；當法老死後，他將進入另一個世界，繼續與神同行。因此，埃及人為法老建造巨大的陵墓，保存他的身體，製作木乃伊，放入黃金、食物、香料與珍寶——他們相信，只要身體被好好保存，靈魂就能在死後的世界繼續生活。金字塔聳立在沙漠之上，不只是墳墓，也是人類對永恆的想像。</p>
+      <p>兩河流域的吉爾伽美什，因朋友之死而追尋永生；古埃及的法老，則相信自己能像太陽一樣，在死亡後再次升起。這兩個古老文明，用不同的故事回答同一個問題：人終究會死，那麼生命的意義是什麼？兩河的人說，也許永生不在身體裡，而在我們留下的事物裡；埃及的人說，死亡不是結束，而是一場通往永恆的旅程。於是，在大河與沙漠之間，人類第一次把對死亡的恐懼寫成了史詩，也把對永恆的渴望建成了金字塔。</p>
+    </section>
+
+    <section class="myth-sec s-greek">
+      <h2 class="serif">希臘與希伯來・世界如何開始</h2>
+      <span class="myth-flow">奧林帕斯諸神　・　《創世記》七日創世</span>
+      <p>很久以前，當人們還不知道宇宙有多大，也不知道地球只是群星之中的一顆行星時，世界各地的人們都在仰望天空，思考同一個問題：世界是怎麼開始的？</p>
+      <p>在遙遠的地中海沿岸，古希臘人相信，在天地誕生之前，宇宙並不是空無一物，而是一片無法形容的混沌。沒有光明，也沒有黑暗；沒有天空，也沒有大地；沒有時間，更沒有生命。他們將這種狀態稱為「混沌」。</p>
+      <p>就在混沌之中，大地女神蓋亞誕生了。蓋亞從虛無中出現，成為萬物的母親。她創造出遼闊的大地，也生出了天空之神烏拉諾斯。天空覆蓋著大地，群山、海洋與河流逐漸形成，世界開始有了模樣。</p>
+      <p>然而，神的世界並不平靜。蓋亞與烏拉諾斯生下許多孩子，但烏拉諾斯害怕子女奪走權力，於是將他們囚禁起來。憤怒的蓋亞決定反抗，她幫助兒子克羅諾斯推翻了父親。克羅諾斯因此成為新的神王；可是當他得到權力後，卻也開始害怕同樣的命運降臨在自己身上——他聽見預言說，未來自己的孩子將推翻他的統治。</p>
+      <p>於是，每當孩子出生，克羅諾斯便將他們吞進肚子裡。一個、兩個、三個……沒有一個孩子能夠逃脫。直到最小的孩子出生時，母親瑞亞再也無法忍受，她偷偷將嬰兒藏起來，用石頭包裹成襁褓交給克羅諾斯。那個被救下的孩子，便是宙斯。</p>
+      <p>宙斯在遙遠的地方秘密長大，一天比一天強壯，也逐漸知道自己的身世。成年之後，他決定挑戰父親。於是，一場持續許久的神戰爆發了：天空震動，大地顫抖，雷電與火焰照亮整個世界。最後，宙斯獲得勝利，解救了被吞入腹中的兄弟姊妹，建立新的神國。從此之後，他與眾神居住在希臘最高的奧林帕斯山上。</p>
+      <p>掌管雷電的宙斯成為眾神之王；掌管海洋的波塞頓統治無盡海域；掌管冥界的黑帝斯守護亡者國度；智慧女神雅典娜教導人類知識；太陽神阿波羅帶來光明與藝術。在古希臘人的想像裡，神雖然擁有強大的力量，卻和人類一樣會歡笑、憤怒、嫉妒與悲傷——他們會相愛，也會爭吵；會幫助人類，也可能因一時情緒降下懲罰。因此希臘神話裡的故事，其實不只是神的故事，更像是人性的縮影。</p>
+      <p>而在地中海東方的沙漠與綠洲之間，另一群人也在思考世界的起源，他們的答案與希臘人完全不同。他們相信，世界並非來自眾神的戰爭，也不是無數神明共同管理的結果——宇宙之中，只有一位創造萬物的神。</p>
+      <p>最初，天地空虛混沌，黑暗籠罩著深淵。沒有山川，沒有海洋，沒有飛鳥，也沒有人類，世界安靜得彷彿尚未甦醒。就在這時，神開口說：「要有光。」於是第一道光芒劃破黑暗，光與暗被分開，白晝與黑夜從此誕生。</p>
+      <p>接著，神創造天空，將上方的水與下方的水分開，讓廣闊的蒼穹展現在世界之上。第三天，神讓海洋聚集、陸地浮現，荒蕪的大地開始長出青草、樹木與花朵。第四天，神創造太陽、月亮與群星，白天有太陽照耀，夜晚有月亮與星辰陪伴。第五天，魚群游進海洋，飛鳥翱翔天空，世界開始有了生命的律動。第六天，各種動物出現在大地上；最後，神按照自己的形象創造了人類，亞當與夏娃睜開眼睛，第一次看見這個美麗的世界。到了第七天，神停止創造，看著自己所創造的一切，認為這一切都是美好的——於是，第七天成為安息的日子。這就是後來流傳千年的《創世記》七日創世故事。</p>
+      <p>有趣的是，雖然希臘人與希伯來人給出了完全不同的答案，但他們其實都在試著解釋同一件事。希臘人相信世界是在眾神的誕生、爭鬥與傳承中逐漸形成的；希伯來人則相信世界是由一位全能的神，有秩序地一步一步創造出來的。一個充滿傳奇與冒險，一個充滿秩序與信仰。</p>
+      <p>當時的人們沒有望遠鏡，無法觀察遙遠的星系；沒有地質學，無法知道地球經歷了數十億年的演化；也沒有宇宙學，無法理解宇宙的起源。但他們仍然抬起頭，望向夜空，看著太陽升起又落下，看著季節循環，看著生命誕生與消逝，於是用故事回答那些最困難的問題：世界從哪裡來？天空是誰創造的？人類為何存在？</p>
+      <p>在希臘的海岸邊，人們講述著奧林帕斯眾神的傳奇；在中東的曠野裡，人們傳誦著七日創世的故事；而在遙遠的東方，中國人說著盤古開天與女媧造人的神話。雖然他們彼此相隔千山萬水，從未見過對方，卻在同一片星空下，努力為世界尋找第一個開始。</p>
+    </section>
   </div>
 </div></div>
 
@@ -613,7 +750,7 @@ function doSearch(){
   const re=q? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'):null;
   rowsMeta.forEach(m=>{
     let hit=!q || m.text.toLowerCase().includes(q.toLowerCase());
-    if(twOnly && !m.rec.tw) hit=false;
+    if(axisCol && !m.rec[axisCol]) hit=false;
     m.el.style.display=hit?'':'none'; if(hit)n++;
     if(q&&hit){
       m.el.querySelectorAll('.evt, .year .yl').forEach(node=>{
@@ -703,12 +840,16 @@ Object.keys(TABS).forEach(t=>document.getElementById(t).onclick=()=>showTab(t));
 document.getElementById('noticeX').onclick=()=>{document.getElementById('notice').classList.add('hidden');fixSticky();};
 
 /* Taiwan-only filter */
-let twOnly=false;
-document.getElementById('twonly').onclick=function(){
-  twOnly=!twOnly; this.classList.toggle('on',twOnly);
-  this.textContent=twOnly?'顯示全部':'只看台灣';
+let axisCol=null;   // null=三軌；'tw'/'cn'/'wo'=單軸
+document.querySelectorAll('.axis').forEach(b=>b.onclick=function(){
+  document.querySelectorAll('.axis').forEach(x=>x.classList.remove('on'));
+  this.classList.add('on');
+  const a=this.dataset.axis;
+  document.body.classList.remove('axis-tw','axis-cn','axis-wo');
+  axisCol = (a==='all')? null : a;
+  if(axisCol) document.body.classList.add('axis-'+a);
   doSearch();
-};
+});
 
 /* spotlight popover: 同年三地對照 */
 function openSpot(i){
@@ -718,14 +859,18 @@ function openSpot(i){
   document.getElementById('spE').style.display=r.era?'':'none';
   const pc=getComputedStyle(r._el).getPropertyValue('--pc')||'#7c4f28';
   document.getElementById('spHead').style.background='linear-gradient(100deg,'+pc+',rgba(0,0,0,.35))';
-  const reg=(key,name,col)=>{
+  const defs=[['tw','台灣','#2e9e6b'],['cn','中國','#cf4436'],['wo','世界','#3f74b8']];
+  let html='';
+  const emptyNames=[];
+  defs.forEach(([key,name,col])=>{
     const evs=splitEvents(r[key]);
-    const body=evs.length?evs.map(e=>'<p>'+esc(e)+'</p>').join(''):'<p>（此年無記載）</p>';
-    return '<div class="sp-reg '+(evs.length?'':'empty')+'" style="--rc:'+col+'"><h4>'+name+'</h4>'+body+'</div>';
-  };
-  document.getElementById('spBody').innerHTML=
-    reg('tw','台灣','#2e9e6b')+reg('cn','中國','#cf4436')+reg('wo','世界','#3f74b8')
-    +(r.note?'<div class="note">'+esc(r.note)+'</div>':'');
+    if(!evs.length){ emptyNames.push(name); return; }
+    html+='<div class="sp-reg" style="--rc:'+col+'"><h4>'+name+'</h4>'
+      + evs.map(e=>'<p>'+esc(e)+'</p>').join('') + '</div>';
+  });
+  if(emptyNames.length) html+='<div class="sp-empty">此年'+emptyNames.join('、')+'無記載</div>';
+  if(r.note) html+='<div class="note">'+esc(r.note)+'</div>';
+  document.getElementById('spBody').innerHTML=html;
   document.getElementById('spot').classList.add('open');
 }
 document.getElementById('spClose').onclick=()=>document.getElementById('spot').classList.remove('open');
@@ -898,6 +1043,12 @@ function openIndex(which){
   document.getElementById('indexview').classList.add('open');
 }
 document.querySelectorAll('.pl-card').forEach(c=>c.onclick=()=>openIndex(c.dataset.idx));
+/* lyrics page */
+document.getElementById('lyrBtn').onclick=()=>{const v=document.getElementById('lyricsview');v.classList.add('open');v.scrollTop=0;};
+document.getElementById('lyrClose').onclick=()=>document.getElementById('lyricsview').classList.remove('open');
+/* creation-myth story page */
+document.getElementById('mythBtn').onclick=()=>{const v=document.getElementById('mythview');v.classList.add('open');v.scrollTop=0;};
+document.getElementById('mythClose').onclick=()=>document.getElementById('mythview').classList.remove('open');
 document.getElementById('idxClose').onclick=()=>document.getElementById('indexview').classList.remove('open');
 document.getElementById('indexview').addEventListener('click',e=>{if(e.target.id==='indexview')e.currentTarget.classList.remove('open');});
 function openMenu(){document.getElementById('featmenu').classList.add('open');}
@@ -909,6 +1060,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCard();
   document.getElementById('featmenu').classList.remove('open');
   document.getElementById('spot').classList.remove('open');
   document.getElementById('indexview').classList.remove('open');
+  document.getElementById('mythview').classList.remove('open');
+  document.getElementById('lyricsview').classList.remove('open');
   document.getElementById('quizview').classList.remove('open');}});
 
 /* minimap: event density per century (recorded era) */
