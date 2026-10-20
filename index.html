@@ -147,6 +147,8 @@ body.present .hint{display:block}
 .btn.feat{background:linear-gradient(180deg,#2f6f8e,#214f66);color:#eaf4f8;border-color:transparent;
   box-shadow:0 3px 10px rgba(33,79,102,.35)}
 .btn.feat:hover{color:#fff;filter:brightness(1.08)}
+.btn.globe{background:linear-gradient(180deg,#5c4327,#3e2c19);color:#f3dfb0;border-color:transparent;font-weight:800;text-decoration:none;display:inline-block}
+.btn.globe:hover{color:#fff;filter:brightness(1.12)}
 
 /* ---------- featured card view ---------- */
 #cardview{position:fixed;inset:0;z-index:70;display:none;overflow-y:auto;background:#101a22}
@@ -180,6 +182,8 @@ body.present .hint{display:block}
   border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:22px;padding:8px 16px;cursor:pointer;
   font-size:13px;font-weight:700;backdrop-filter:blur(6px)}
 .cv-close:hover{background:rgba(255,255,255,.26)}
+.cv-globe{display:inline-block;margin-top:14px;padding:7px 18px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:700;font-size:13.5px;text-decoration:none;position:relative;z-index:2}
+.cv-globe:hover{background:rgba(255,255,255,.26)}
 .cv-legend{display:flex;justify-content:center;gap:18px;margin-top:14px;font-size:12.5px;font-weight:700}
 .cv-legend span{display:flex;align-items:center;gap:6px;color:#dff0f5}
 .cv-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
@@ -422,6 +426,7 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
     <div class="group">
       <button class="btn home" id="prologue">首頁・序章</button>
       <button class="btn feat" id="feature">歷史特輯</button>
+      <a class="btn globe" href="https://anespropofolanes-cyber.github.io/globe/">地球儀館</a>
       <button class="btn tab" id="tabEra">時代</button>
       <button class="btn tab" id="tabFilter">篩選</button>
       <button class="btn tab" id="tabFunc">功能</button>
@@ -496,6 +501,7 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
         <span>或直接前往：</span>
         <button class="pl-qbtn" data-go="feature">歷史特輯</button>
         <button class="pl-qbtn" data-go="quiz">小測驗</button>
+        <a class="pl-qbtn" href="https://anespropofolanes-cyber.github.io/globe/" style="text-decoration:none">地球儀館</a>
       </div>
     </div>
 
@@ -983,11 +989,14 @@ const FEATURES=[
  {id:'imperial', t:'帝國主義到一戰・日治台灣', r:'1895–1930', a:[1895,1930], svg:'imperial', bg:'#10141a', ac:['#4a6072','#2c3a48'],
   kick:'帝國與戰火', sub:'列強瓜分世界，第一次世界大戰爆發、俄國革命改寫版圖；清帝國在辛亥革命中終結、中華民國成立。台灣已入日本之手，殖民與同化政策深刻形塑這座島嶼。'},
 ];
+// globe versions of the features (地球儀館 sister site)
+const GLOBE={voyage:'voyage.html',port:'port.html',coldwar:'coldwar.html',axial:'axial.html',empire:'empire.html',weijin:'weijin.html',
+  tang:'tang.html',mongol:'mongol.html',renai:'renai.html',revol:'revol.html',imperial:'wars.html'};
 function buildCardView(f){
   const hero=document.getElementById('cvHero');
   hero.innerHTML=(f.svg?SVG[f.svg]:'')
     +'<div class="inner"><div class="cv-kick">'+f.kick+'</div><div class="cv-title serif">'+f.t+'　'+f.r
-    +'</div><div class="cv-sub">'+f.sub+'</div><div class="cv-legend">'
+    +'</div><div class="cv-sub">'+f.sub+'</div>'+(GLOBE[f.id]?'<a class="cv-globe" href="https://anespropofolanes-cyber.github.io/globe/'+GLOBE[f.id]+'">在地球儀上看這段歷史 →</a>':'')+'<div class="cv-legend">'
     +'<span><i style="background:var(--tw)"></i>台灣</span><span><i style="background:var(--cn)"></i>中國</span><span><i style="background:var(--wo)"></i>世界</span></div></div>';
   hero.style.background = f.svg? '' : ('linear-gradient(135deg,'+f.ac[0]+','+f.ac[1]+')');
   const cv=document.getElementById('cardview');
