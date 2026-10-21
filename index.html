@@ -426,7 +426,7 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
     <div class="group">
       <button class="btn home" id="prologue">首頁・序章</button>
       <button class="btn feat" id="feature">歷史特輯</button>
-      <a class="btn globe" href="https://anespropofolanes-cyber.github.io/globe/">地球儀館</a>
+      <a class="btn globe" href="https://globe.anespropofolanes.workers.dev/">地球儀館</a>
       <button class="btn tab" id="tabEra">時代</button>
       <button class="btn tab" id="tabFilter">篩選</button>
       <button class="btn tab" id="tabFunc">功能</button>
@@ -501,7 +501,7 @@ body.home header,body.home .heads,body.home #grid,body.home .nores,body.home .hi
         <span>或直接前往：</span>
         <button class="pl-qbtn" data-go="feature">歷史特輯</button>
         <button class="pl-qbtn" data-go="quiz">小測驗</button>
-        <a class="pl-qbtn" href="https://anespropofolanes-cyber.github.io/globe/" style="text-decoration:none">地球儀館</a>
+        <a class="pl-qbtn" href="https://globe.anespropofolanes.workers.dev/" style="text-decoration:none">地球儀館</a>
       </div>
     </div>
 
@@ -996,7 +996,7 @@ function buildCardView(f){
   const hero=document.getElementById('cvHero');
   hero.innerHTML=(f.svg?SVG[f.svg]:'')
     +'<div class="inner"><div class="cv-kick">'+f.kick+'</div><div class="cv-title serif">'+f.t+'　'+f.r
-    +'</div><div class="cv-sub">'+f.sub+'</div>'+(GLOBE[f.id]?'<a class="cv-globe" href="https://anespropofolanes-cyber.github.io/globe/'+GLOBE[f.id]+'">在地球儀上看這段歷史 →</a>':'')+'<div class="cv-legend">'
+    +'</div><div class="cv-sub">'+f.sub+'</div>'+(GLOBE[f.id]?'<a class="cv-globe" href="https://globe.anespropofolanes.workers.dev/'+GLOBE[f.id]+'">在地球儀上看這段歷史 →</a>':'')+'<div class="cv-legend">'
     +'<span><i style="background:var(--tw)"></i>台灣</span><span><i style="background:var(--cn)"></i>中國</span><span><i style="background:var(--wo)"></i>世界</span></div></div>';
   hero.style.background = f.svg? '' : ('linear-gradient(135deg,'+f.ac[0]+','+f.ac[1]+')');
   const cv=document.getElementById('cardview');
